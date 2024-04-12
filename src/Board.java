@@ -30,4 +30,34 @@ public class Board {
     public int getColumn(){
         return column;
     }
+    public int checkForWin() {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            int rowSum = board[i][0] + board[i][1] + board[i][2];
+            if (rowSum == 3)
+                return 1; // Player with 'X' has won
+            else if (rowSum == -3)
+                return -1; // Player with 'O' has won
+        }
+
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            int colSum = board[0][i] + board[1][i] + board[2][i];
+            if (colSum == 3)
+                return 1; // Player with 'X' has won
+            else if (colSum == -3)
+                return -1; // Player with 'O' has won
+        }
+
+        // Check diagonals
+        int diagSum1 = board[0][0] + board[1][1] + board[2][2];
+        int diagSum2 = board[0][2] + board[1][1] + board[2][0];
+        if (diagSum1 == 3 || diagSum2 == 3)
+            return 1; // Player with 'X' has won
+        else if (diagSum1 == -3 || diagSum2 == -3)
+            return -1; // Player with 'O' has won
+
+        // No winner yet
+        return 0;
+    }
 }
