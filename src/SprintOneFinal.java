@@ -3,7 +3,38 @@ import java.util.*;
 public class SprintOneFinal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//    Board[][] data = new Board[3][3];
+
+        //Creates 3x3 Grid
+        Board[][] data = new Board[3][3];
+        for(int x = 0; x < 3; x++){
+            for(int y = 0; y < 3; y++){
+                data[x][y] = new Board(0,0);
+            }
+        }
+
+        //Randomly fills all 9 games in a grid for testing purposes
+        Random rand = new Random();
+        for(int r = 0; r < 3; r++){
+            for(int c = 0; c < 3; c++){
+                Board temp = data[r][c];
+                for(int x = 0; x < 3; x++){
+                    for(int y = 0; y < 3; y++){
+                        temp.modifyBoard(x,y,rand.nextInt(2)-1);
+                    }
+                }
+                //System.out.println(temp);
+            }
+
+        }
+
+
+
+
+        //for(int x=0; x<3; x++)
+        //    for(int y=0; y<3; y++)
+        //        data[x][y] = new Board(x,y);
+
+        DisplayGrid.render(data);
 //        Board test2 = new Board(0,0);
 //        Display.render(test2);
 
