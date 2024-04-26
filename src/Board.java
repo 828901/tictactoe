@@ -1,5 +1,7 @@
 public class Board {
 
+    private int winStatus = 0;
+
     //row and column might not be necessary, they were originally added in case you wanted to store their position on a grid of boards
     private static int row;
     private static int column;
@@ -19,9 +21,25 @@ public class Board {
     public int[][] getBoard(){
         return board;
     }
+    public int getValue(int x, int y){
+        return board[x][y];
+    }
+
+
 
     public void modifyBoard(int x, int y, int value){
         board[x][y] = value;
+    }
+
+    public String toString(){
+        String string = "";
+        for(int x = 0; x < 3; x++){
+            for(int y = 0; y < 3; y++){
+                string += board[x][y] + ", ";
+            }
+        }
+        return string;
+
     }
 
     public int getRow(){
@@ -30,14 +48,23 @@ public class Board {
     public int getColumn(){
         return column;
     }
+
+    public int getWinStatus(){
+        return winStatus;
+    }
+
     public int checkForWin() {
         // Check rows
         for (int i = 0; i < 3; i++) {
             int rowSum = board[i][0] + board[i][1] + board[i][2];
-            if (rowSum == 3)
+            if (rowSum == 3) {
+                winStatus = 1;
                 return 1; // Player with 'X' has won
-            else if (rowSum == -3)
+            }
+            else if (rowSum == -3) {
+                winStatus = -1;
                 return -1; // Player with 'O' has won
+            }
         }
 
         // Check columns
