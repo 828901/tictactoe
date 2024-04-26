@@ -92,26 +92,15 @@ public class SprintTwoParker {
         return 0;
     }
 
-  //Checking board
-  public static int[] getOverallBoard(int x, int y) {
-      // Determine the larger grid based on the current move coordinates
-      int overallRow = x / 3;
-      int overallColumn = y / 3;
-      return new int[]{overallRow, overallColumn};
-  }
-  
-  public static int[] getNextBoard(int x, int y, Board[][] data) {
-      int[] overallBoard = getOverallBoard(x, y);
-      int overallRow = overallBoard[0];
-      int overallColumn = overallBoard[1];
-      Board currentBoard = data[overallRow][overallColumn];
-      // Check if the current board has been won
-      if (currentBoard.checkForWin() != 0) {
-          // Allow the user to choose which board to be directed if the current board has been won
-          return overallBoard;
+  //Checking board, return coord of next board, if won return 0
+  public static int[] getNextBoard(int r, int c){
+        int[] coord = [r,c];
+      int[] anywhere = [;
+      if(data[r][c].checkForWin() != 0){
+          return coord;
       }
-      // If the current board has not been won, direct the user to the corresponding board
-      return new int[]{x % 3, y % 3};
+      else{
+          return 
   }
   
 }
