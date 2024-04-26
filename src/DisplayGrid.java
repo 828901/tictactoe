@@ -27,19 +27,14 @@ public class DisplayGrid {
 
                 for (int y = 0; y < 3; y++) {
 
-
                     //For the purposes of display the grid, we only need one row of every board at a time
                     rowOne[y] = tempBoardOne.getValue(x, y);
                     rowTwo[y] = tempBoardTwo.getValue(x, y);
                     rowThree[y] = tempBoardThree.getValue(x, y);
-
                 }
-
                 System.out.print("┃ │ " + getSymbol(rowOne[0]) + " │ " + getSymbol(rowOne[1]) + " │ " + getSymbol(rowOne[2]) + " │ ┃");
-
                 System.out.print(" │ " + getSymbol(rowTwo[0]) + " │ " + getSymbol(rowTwo[1]) + " │ " + getSymbol(rowTwo[2]) + " │ ┃");
                 System.out.print(" │ " + getSymbol(rowThree[0]) + " │ " + getSymbol(rowThree[1]) + " │ " + getSymbol(rowThree[2]) + " │ ┃\n");
-                //break;
             }
             System.out.println("┃ └───┴───┴───┘ ┃ └───┴───┴───┘ ┃ └───┴───┴───┘ ┃");
             if(r == 2){
@@ -48,15 +43,5 @@ public class DisplayGrid {
                 System.out.println("┣━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┫");
             }
         }
-
-
-
-
-
-        //int[][] temp = data[1][1].getBoard();
-        //System.out.println(temp[1][1]);
-
-
     }
-
 }
