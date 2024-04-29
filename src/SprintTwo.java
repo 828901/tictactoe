@@ -13,20 +13,87 @@ public class SprintTwo {
         }
 
         //Randomly fills all 9 games in a grid for testing purposes
-        Random rand = new Random();
-        for (int r = 0; r < 3; r++) {
-            for (int c = 0; c < 3; c++) {
-                for (int x = 0; x < 3; x++) {
-                    for (int y = 0; y < 3; y++) {
-                        data[r][c].modifyBoard(x, y, rand.nextInt(3) - 1);
+//        Random rand = new Random();
+//        for (int r = 0; r < 3; r++) {
+//            for (int c = 0; c < 3; c++) {
+//                for (int x = 0; x < 3; x++) {
+//                    for (int y = 0; y < 3; y++) {
+//                        data[r][c].modifyBoard(x, y, rand.nextInt(3) - 1);
+//                    }
+//                }
+//            }
+//        }
+
+
+        //Game Loop
+        int currentPlayer = 1, bigRow, bigColumn, smallRow = -1, smallColumn = -1, tempRow = -1, tempColumn = -1;
+        boolean validInput = false;
+
+        while (true) {
+            DisplayGrid.render(data); //Display current board
+
+            if (smallRow != -1 && smallColumn != -1) {
+                bigRow = smallRow;
+                bigColumn = smallColumn;
+                if (data[smallRow][smallColumn].checkForWin() != 0) {
+                    validInput = false;
+                    while (!validInput) {
+                        try {
+                            System.out.println("\nPlayer " + (currentPlayer == 1 ? "'X'" : "'O'") + ", choose your board (row column):");
+                            tempRow = Integer.parseInt(scanner.nextLine());
+                            tempColumn = Integer.parseInt(scanner.nextLine());
+                            validInput = true;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input. Please enter an integer.");
+                        }
+                    }
+                    // Validate input
+                    if (tempRow < 0 || tempRow > 2 || tempColumn < 0 || tempColumn > 2 || data[bigRow][bigColumn].getBoard()[tempRow][tempColumn] != 0) {
+                        System.out.println("\nInvalid move. Try again.");
+                        continue;
+                    }
+                    bigRow = tempRow;
+                    bigColumn = tempColumn;
+                }
+                validInput = false;
+                while (!validInput) {
+                    try {
+                        System.out.println("Player " + (currentPlayer == 1 ? "'X'" : "'O'") + ", enter your move (row column):");
+                        tempRow = Integer.parseInt(scanner.nextLine());
+                        tempColumn = Integer.parseInt(scanner.nextLine());
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter an integer.");
                     }
                 }
+                // Validate input
+                if (tempRow < 0 || tempRow > 2 || tempColumn < 0 || tempColumn > 2 || data[bigRow][bigColumn].getBoard()[tempRow][tempColumn] != 0) {
+                    System.out.println("\nInvalid move. Try again.");
+                    continue;
+                }
+                smallRow = tempRow;
+                smallColumn = tempColumn;
+            } else {
+                System.out.println("\nPlayer " + (currentPlayer == 1 ? "'X'" : "'O'") + ", choose your board (row column):");
+                bigRow = scanner.nextInt();
+                bigColumn = scanner.nextInt();
+                System.out.println("Player " + (currentPlayer == 1 ? "'X'" : "'O'") + ", enter your move (row column):");
+                smallRow = scanner.nextInt();
+                smallColumn = scanner.nextInt();
             }
 
+
+            data[bigRow][bigColumn].modifyBoard(smallRow, smallColumn, currentPlayer);
+
+            if (checkBoard(data) == 1) {
+                System.out.println("Player X wins!");
+                break;
+            } else if (checkBoard(data) == -1) {
+                System.out.println("Player O wins!");
+                break;
+            }
+            currentPlayer = currentPlayer * -1;
         }
-
-        DisplayGrid.render(data);
-
     }
 
     public static int checkBoard(Board[][] board) {
