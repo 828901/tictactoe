@@ -27,12 +27,12 @@ public class SprintTwo {
 
         //Game Loop
         int currentPlayer = 1, bigRow, bigColumn, smallRow = -1, smallColumn = -1, tempRow = -1, tempColumn = -1;
-        boolean validInput = false;
+        boolean validInput;
 
         while (true) {
             DisplayGrid.render(data); //Display current board
 
-            if (smallRow != -1 && smallColumn != -1) {
+            if (smallRow != -1) {
                 bigRow = smallRow;
                 bigColumn = smallColumn;
                 if (data[smallRow][smallColumn].checkForWin() != 0) {
@@ -74,12 +74,43 @@ public class SprintTwo {
                 smallRow = tempRow;
                 smallColumn = tempColumn;
             } else {
-                System.out.println("\nPlayer " + (currentPlayer == 1 ? "'X'" : "'O'") + ", choose your board (row column):");
-                bigRow = scanner.nextInt();
-                bigColumn = scanner.nextInt();
-                System.out.println("Player " + (currentPlayer == 1 ? "'X'" : "'O'") + ", enter your move (row column):");
-                smallRow = scanner.nextInt();
-                smallColumn = scanner.nextInt();
+                validInput = false;
+                while (!validInput) {
+                    try {
+                        System.out.println("\nPlayer 'X', choose your board (row column):");
+                        tempRow = Integer.parseInt(scanner.nextLine());
+                        tempColumn = Integer.parseInt(scanner.nextLine());
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter an integer.");
+                    }
+                }
+                // Validate input
+                if (tempRow < 0 || tempRow > 2 || tempColumn < 0 || tempColumn > 2) {
+                    System.out.println("\nInvalid move. Try again.");
+                    continue;
+                }
+                bigRow = tempRow;
+                bigColumn = tempColumn;
+
+                validInput = false;
+                while (!validInput) {
+                    try {
+                        System.out.println("Player 'X', enter your move (row column):");
+                        tempRow = Integer.parseInt(scanner.nextLine());
+                        tempColumn = Integer.parseInt(scanner.nextLine());
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter an integer.");
+                    }
+                }
+                // Validate input
+                if (tempRow < 0 || tempRow > 2 || tempColumn < 0 || tempColumn > 2 || data[bigRow][bigColumn].getBoard()[tempRow][tempColumn] != 0) {
+                    System.out.println("\nInvalid move. Try again.");
+                    continue;
+                }
+                smallRow = tempRow;
+                smallColumn = tempColumn;
             }
 
 
