@@ -5,11 +5,16 @@ import java.awt.*;
 public class Main {
     static JFrame frame = new JFrame();
     static Board[][] data = new Board[3][3];
+    static int currentPlayer = 1; // 1 for X, -1 for O
 
     public static void update(int boardRow,int boardCol,int cellRow,int cellCol){
-        System.out.println(data[boardRow][boardCol].getValue(cellRow, cellCol));
-        data[boardRow][boardCol].modifyBoard(cellRow,cellCol,1);
-        System.out.println(data[boardRow][boardCol].getValue(cellRow, cellCol));
+        if(currentPlayer == 1){
+            data[boardRow][boardCol].modifyBoard(cellRow,cellCol,1);
+            currentPlayer = -1;
+        }else{
+            data[boardRow][boardCol].modifyBoard(cellRow,cellCol,-1);
+            currentPlayer = 1;
+        }
         frame.repaint();
     }
 
@@ -26,7 +31,7 @@ public class Main {
             }
         }
 
-        Random rand = new Random();
+        /*Random rand = new Random();
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 for (int x = 0; x < 3; x++) {
@@ -35,7 +40,7 @@ public class Main {
                     }
                 }
             }
-        }
+        }*/
 
 
         frame.setTitle("Ultimate Tic-Tac-Toe");
@@ -47,7 +52,7 @@ public class Main {
         frame.setVisible(true);
 
         //Add game loop here
-        int currentPlayer = 1; // 1 for X, -1 for O
+
         boolean gameOver = false;
 
         int bRow = 0, bCol = 0, sRow = 0, sCol = 0;
@@ -55,7 +60,7 @@ public class Main {
 
         data[bRow][bCol].modifyBoard(sRow, sCol, currentPlayer);
 
-        System.out.println("enter row col");
+        /*System.out.println("enter row col");
         bRow = scan.nextInt();
         bCol = scan.nextInt();
         System.out.println("enter row col");
@@ -70,7 +75,7 @@ public class Main {
         sRow = scan.nextInt();
         sCol = scan.nextInt();
         data[bRow][bCol].modifyBoard(sRow, sCol, currentPlayer);
-        frame.repaint();
+        frame.repaint();*/
 
         
     }

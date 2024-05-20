@@ -40,8 +40,8 @@ public class GraphicalUserInterface extends JPanel {
         // UPDATE THE BOARD HERE
 
     
-        System.out.println("\nLarger board row: " + boardRow + ", col: " + boardCol);
-        System.out.println("Smaller board row: " + cellRow + ", col: " + cellCol);       
+        //System.out.println("\nLarger board row: " + boardRow + ", col: " + boardCol);
+        //System.out.println("Smaller board row: " + cellRow + ", col: " + cellCol);
         
       }
     
@@ -81,7 +81,7 @@ public class GraphicalUserInterface extends JPanel {
         for (int r = 0; r < 3; r++) {
                for (int c = 0; c < 3; c++) {
                    if (boards[r][c].checkForWin() != 0) {
-                       System.out.print("\n" + r + " " + c);
+                       //System.out.print("\n" + r + " " + c);
                        if (boards[r][c].checkForWin() == 1) drawBigRedX(g2d, r, c);
                        else drawBigRedO(g2d, r, c);
                        continue;
