@@ -1,26 +1,37 @@
 import java.awt.*;
-import java.util.*;
 import javax.swing.*;
 
 public class Main {
     static JFrame frame = new JFrame();
     static Board[][] data = new Board[3][3];
-    static int currentPlayer = 1; // 1 for X, -1 for O
+    static int currentPlayer = 1;// 1 for X, -1 for O
+    static boolean pickAnywhere = true;
     static int lastRow, lastCol;
     static GraphicalUserInterface gui = new GraphicalUserInterface(data);
 
-    public static void update(Graphics2D g, int boardRow, int boardCol, int cellRow, int cellCol){
-        if(data[boardRow][boardCol].getValue(cellRow,cellCol) == 0){
-            if(boardRow == lastRow && boardCol == lastCol){
+    public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
+        //there is currently a few bugs
+        //if you have a board selected you can click on another board and choose a different spot
+        //if you end up in a draw case, you are stuck.
+
+            if((boardRow == lastRow && boardCol == lastCol) || pickAnywhere){
+                if(((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) && data[boardRow][boardCol].checkForWin() == 0)){
+                    lastRow = cellRow;
+                    lastCol = cellCol;
+                    data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
+                    currentPlayer *= -1;
+                    frame.repaint();
+                    gui.drawHighlight(g,lastCol,lastRow);
+                    pickAnywhere = false;
+                }
+            }else{
                 lastRow = cellRow;
                 lastCol = cellCol;
-                data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
-                currentPlayer *= -1;
                 frame.repaint();
-                gui.drawHighlight(g,lastRow,lastCol);
-            }
-
+                gui.drawHighlight(g,-1,-1);
+                pickAnywhere = true;
         }
+
 
     }
 
@@ -57,33 +68,6 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        //Add game loop here
-
-        boolean gameOver = false;
-
-        int bRow = 0, bCol = 0, sRow = 0, sCol = 0;
-        Scanner scan = new Scanner(System.in);
-
-        data[bRow][bCol].modifyBoard(sRow, sCol, currentPlayer);
-
-        /*System.out.println("enter row col");
-        bRow = scan.nextInt();
-        bCol = scan.nextInt();
-        System.out.println("enter row col");
-        sRow = scan.nextInt();
-        sCol = scan.nextInt();
-        data[bRow][bCol].modifyBoard(sRow, sCol, currentPlayer);
-        frame.repaint();
-        System.out.println("enter row col");
-        bRow = scan.nextInt();
-        bCol = scan.nextInt();
-        System.out.println("enter row col");
-        sRow = scan.nextInt();
-        sCol = scan.nextInt();
-        data[bRow][bCol].modifyBoard(sRow, sCol, currentPlayer);
-        frame.repaint();*/
-
-        
     }
     
 

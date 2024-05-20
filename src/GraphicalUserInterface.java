@@ -10,7 +10,10 @@ public class GraphicalUserInterface extends JPanel {
     private static final int CELL_SIZE = 100;
     private int boardRow = 0, boardCol = 0, cellRow = 0, cellCol = 0;
     private Board[][] boards = new Board[NUM_BOARDS][NUM_BOARDS];
-    private Graphics2D graphics;
+    private Graphics graphics;
+
+    private int hightlightRow = -1;
+    private int hightlightCol = -1;
 
     public GraphicalUserInterface(Board[][] boards) {
         this.boards = boards;
@@ -40,7 +43,6 @@ public class GraphicalUserInterface extends JPanel {
 
         // UPDATE THE BOARD HERE
 
-    
         //System.out.println("\nLarger board row: " + boardRow + ", col: " + boardCol);
         //System.out.println("Smaller board row: " + cellRow + ", col: " + cellCol);
         
@@ -49,10 +51,20 @@ public class GraphicalUserInterface extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+        graphics = g;
+
         Graphics2D g2d = (Graphics2D) g;
-        graphics = g2d;
         g2d.setStroke(new BasicStroke(4f));
+
+        if(hightlightRow != -1 && hightlightCol != -1){
+            g.setColor(new Color(200,200,200));
+            g.fillRect(hightlightRow*300,hightlightCol*300,BOARD_SIZE * CELL_SIZE,BOARD_SIZE * CELL_SIZE);
+            g.setColor(Color.BLACK);
+        }else{
+            g.setColor(new Color(200,200,200));
+            g.fillRect(0,0,900,900);
+            g.setColor(Color.BLACK);
+        }
         
         for (int i = 0; i < NUM_BOARDS; i++) {
             for (int j = 0; j < NUM_BOARDS; j++) {
@@ -133,12 +145,9 @@ public class GraphicalUserInterface extends JPanel {
         g2d.setColor(Color.BLACK);
     }
 
-    public void drawHighlight(Graphics2D g2d, int boardRow, int boardCol){
-        float alpha = 0.5F;
-        Color color = new Color(1F, 1F, 1F, alpha); //Red
-        g2d.setPaint(color);
-        g2d.fillRect(0,0,900,900);
-        System.out.println(color);
+    public void drawHighlight(Graphics g, int row, int col){
+        hightlightRow = row;
+        hightlightCol = col;
     }
     private void updateBoard(Board[][] boards) {this.boards = boards;}
     
