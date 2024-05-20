@@ -1,21 +1,27 @@
+import java.awt.*;
 import java.util.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     static JFrame frame = new JFrame();
     static Board[][] data = new Board[3][3];
     static int currentPlayer = 1; // 1 for X, -1 for O
+    static int lastRow, lastCol;
+    static GraphicalUserInterface gui = new GraphicalUserInterface(data);
 
-    public static void update(int boardRow,int boardCol,int cellRow,int cellCol){
-        if(currentPlayer == 1){
-            data[boardRow][boardCol].modifyBoard(cellRow,cellCol,1);
-            currentPlayer = -1;
-        }else{
-            data[boardRow][boardCol].modifyBoard(cellRow,cellCol,-1);
-            currentPlayer = 1;
+    public static void update(Graphics2D g, int boardRow, int boardCol, int cellRow, int cellCol){
+        if(data[boardRow][boardCol].getValue(cellRow,cellCol) == 0){
+            if(boardRow == lastRow && boardCol == lastCol){
+                lastRow = cellRow;
+                lastCol = cellCol;
+                data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
+                currentPlayer *= -1;
+                frame.repaint();
+                gui.drawHighlight(g,lastRow,lastCol);
+            }
+
         }
-        frame.repaint();
+
     }
 
     public static void main(String[] args) {
@@ -45,7 +51,7 @@ public class Main {
 
         frame.setTitle("Ultimate Tic-Tac-Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GraphicalUserInterface gui = new GraphicalUserInterface(data);
+
         frame.add(gui);
         frame.pack();
         frame.setLocationRelativeTo(null);

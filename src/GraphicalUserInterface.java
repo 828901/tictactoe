@@ -10,6 +10,7 @@ public class GraphicalUserInterface extends JPanel {
     private static final int CELL_SIZE = 100;
     private int boardRow = 0, boardCol = 0, cellRow = 0, cellCol = 0;
     private Board[][] boards = new Board[NUM_BOARDS][NUM_BOARDS];
+    private Graphics2D graphics;
 
     public GraphicalUserInterface(Board[][] boards) {
         this.boards = boards;
@@ -21,7 +22,7 @@ public class GraphicalUserInterface extends JPanel {
             int x = e.getX();
             int y = e.getY();
             registerUserInput(x, y);
-            Main.update(boardRow,boardCol,cellRow,cellCol);
+            Main.update(graphics,boardRow,boardCol,cellRow,cellCol);
             }
         });
         
@@ -50,6 +51,7 @@ public class GraphicalUserInterface extends JPanel {
         super.paintComponent(g);
         
         Graphics2D g2d = (Graphics2D) g;
+        graphics = g2d;
         g2d.setStroke(new BasicStroke(4f));
         
         for (int i = 0; i < NUM_BOARDS; i++) {
@@ -129,6 +131,14 @@ public class GraphicalUserInterface extends JPanel {
         int y = boardRow * BOARD_SIZE * CELL_SIZE;
         g2d.drawOval(x + 10, y + 10, BOARD_SIZE * CELL_SIZE - 20, BOARD_SIZE * CELL_SIZE - 20);
         g2d.setColor(Color.BLACK);
+    }
+
+    public void drawHighlight(Graphics2D g2d, int boardRow, int boardCol){
+        float alpha = 0.5F;
+        Color color = new Color(1F, 1F, 1F, alpha); //Red
+        g2d.setPaint(color);
+        g2d.fillRect(0,0,900,900);
+        System.out.println(color);
     }
     private void updateBoard(Board[][] boards) {this.boards = boards;}
     
