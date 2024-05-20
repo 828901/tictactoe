@@ -3,18 +3,41 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
+    static JFrame frame = new JFrame();
+    static Board[][] data = new Board[3][3];
+
+    public static void update(int boardRow,int boardCol,int cellRow,int cellCol){
+        System.out.println(data[boardRow][boardCol].getValue(cellRow, cellCol));
+        data[boardRow][boardCol].modifyBoard(cellRow,cellCol,1);
+        System.out.println(data[boardRow][boardCol].getValue(cellRow, cellCol));
+        frame.repaint();
+    }
+
     public static void main(String[] args) {
+
+
+
         // Scanner scanner = new Scanner(System.in);
 
         //Creates 3x3 Grid
-        Board[][] data = new Board[3][3];
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 data[r][c] = new Board(3, 3);
             }
         }
 
-        JFrame frame = new JFrame();
+        Random rand = new Random();
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                for (int x = 0; x < 3; x++) {
+                    for (int y = 0; y < 3; y++) {
+                        data[r][c].modifyBoard(x, y, rand.nextInt(3) - 1);
+                    }
+                }
+            }
+        }
+
+
         frame.setTitle("Ultimate Tic-Tac-Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GraphicalUserInterface gui = new GraphicalUserInterface(data);

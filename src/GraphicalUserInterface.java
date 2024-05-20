@@ -1,4 +1,3 @@
-import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -22,7 +21,7 @@ public class GraphicalUserInterface extends JPanel {
             int x = e.getX();
             int y = e.getY();
             registerUserInput(x, y);
-            System.out.print(boardRow + "" + boardCol + "" + cellRow + "" + cellCol);
+            Main.update(boardRow,boardCol,cellRow,cellCol);
             }
         });
         
