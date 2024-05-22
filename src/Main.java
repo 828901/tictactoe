@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.Arrays;
+import java.util.Random;
 import javax.swing.*;
 
 public class Main {
@@ -7,15 +9,18 @@ public class Main {
     static int currentPlayer = 1;// 1 for X, -1 for O
     static boolean pickAnywhere = true;
     static int lastRow, lastCol;
-    static GraphicalUserInterface gui = new GraphicalUserInterface(data);
+    static int[][] boardsWon = new int[3][3];
+    static GraphicalUserInterface gui = new GraphicalUserInterface(data, boardsWon);
 
     public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
         //there is currently a few bugs
         //if you have a board selected you can click on another board and choose a different spot
         //if you end up in a draw case, you are stuck.
+        System.out.println(Arrays.deepToString(boardsWon));
 
-            if((boardRow == lastRow && boardCol == lastCol) || pickAnywhere){
-                if(((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) && data[boardRow][boardCol].checkForWin() == 0)){
+            if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere)
+                    && ((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0)
+                    && data[boardRow][boardCol].checkForWin() == 0)){
                     lastRow = cellRow;
                     lastCol = cellCol;
                     data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
@@ -23,12 +28,12 @@ public class Main {
                     frame.repaint();
                     gui.drawHighlight(g,lastCol,lastRow);
                     pickAnywhere = false;
-                }
-            }else{
+            }else if(boardsWon[boardRow][boardCol] != 0){
+                System.out.println("Selected");
                 lastRow = cellRow;
                 lastCol = cellCol;
-                frame.repaint();
                 gui.drawHighlight(g,-1,-1);
+                frame.repaint();
                 pickAnywhere = true;
         }
 
@@ -48,7 +53,7 @@ public class Main {
             }
         }
 
-        /*Random rand = new Random();
+        Random rand = new Random();
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 for (int x = 0; x < 3; x++) {
@@ -57,7 +62,7 @@ public class Main {
                     }
                 }
             }
-        }*/
+        }
 
 
         frame.setTitle("Ultimate Tic-Tac-Toe");

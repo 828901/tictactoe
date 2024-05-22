@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class GraphicalUserInterface extends JPanel {
 
@@ -15,7 +16,10 @@ public class GraphicalUserInterface extends JPanel {
     private int hightlightRow = -1;
     private int hightlightCol = -1;
 
-    public GraphicalUserInterface(Board[][] boards) {
+    private int[][] boardsWon;
+
+    public GraphicalUserInterface(Board[][] boards, int[][] boardsWonIn) {
+        boardsWon = boardsWonIn;
         this.boards = boards;
         setPreferredSize(new Dimension(NUM_BOARDS * BOARD_SIZE * CELL_SIZE, NUM_BOARDS * BOARD_SIZE * CELL_SIZE));
         setBackground(Color.WHITE);
@@ -128,6 +132,7 @@ public class GraphicalUserInterface extends JPanel {
         g2d.drawOval(x + 10, y + 10, CELL_SIZE - 20, CELL_SIZE - 20);
     }
     private void drawBigRedX(Graphics2D g2d, int boardRow, int boardCol) {
+        boardsWon[boardRow][boardCol] = 1;
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(10f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE;
@@ -137,6 +142,7 @@ public class GraphicalUserInterface extends JPanel {
         g2d.setColor(Color.BLACK);
       }
     private void drawBigRedO(Graphics2D g2d, int boardRow, int boardCol) {
+        boardsWon[boardRow][boardCol] = -1;
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(10f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE;
