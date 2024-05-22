@@ -23,8 +23,8 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry, Noah
     //Precondition: X and Y exist when mouse
     //Postcondition: Creates a new GUI as well as detector for when the mouse is clicked. 
-    //@para: The board, 
-    public GraphicalUserInterface(Board[][] boards, int[][] boardsWonIn) { //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX boardsWonIn as param?
+    //@para: The board, 2d integer of the win status of each board
+    public GraphicalUserInterface(Board[][] boards, int[][] boardsWonIn) { 
         boardsWon = boardsWonIn;
         this.boards = boards;
         setPreferredSize(new Dimension(NUM_BOARDS * BOARD_SIZE * CELL_SIZE, NUM_BOARDS * BOARD_SIZE * CELL_SIZE));
@@ -49,7 +49,7 @@ public class GraphicalUserInterface extends JPanel {
 
     //Author: Harry
     //Precondition: X and Y are not beyond the borders of the board. 
-    //Postcondition: the board/cell row and collumn are updated to the users location. XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX double check w/ harry
+    //Postcondition: the board/cell row and collumn are updated to the users location.
     //@para: The locations of x and y where the mouse is clicked. 
     private void registerUserInput(int x, int y) {
         // Determine the larger board
@@ -62,7 +62,7 @@ public class GraphicalUserInterface extends JPanel {
       }
     
     //Author: Harry
-    //Precondition: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX WTF IS THE HIGHLIGHT ROW/COL for PRE 
+    //Precondition: GUI exists.  
     //Postcondition: The GUI's visual aspect is created. If a user has won a board, a large symbol (X/O) is drawn in accordance to the user that won. 
     //@para: The GUI 
     @Override
