@@ -1,6 +1,4 @@
 public class DisplayGrid {
-    static int rows;
-    static int columns;
 
     public static char getSymbol(int number){
         if(number == 1)
