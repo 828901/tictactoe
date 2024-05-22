@@ -1,26 +1,27 @@
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Random;
 import javax.swing.*;
 
+//Class Author: Noah, Harry
+//Class Purpose: Runs the ultimate tic tac toe board game, updates the GUI according to user input, and returns a value after checking the board for a winner. 
 public class Main {
     static JFrame frame = new JFrame();
     static Board[][] data = new Board[3][3];
     static int currentPlayer = 1;// 1 for X, -1 for O
     static boolean pickAnywhere = true;
     static int lastRow, lastCol;
-    static int[][] boardsWon = new int[3][3];
-    static GraphicalUserInterface gui = new GraphicalUserInterface(data, boardsWon);
+    static GraphicalUserInterface gui = new GraphicalUserInterface(data);
 
+    //Author: Noah 
+    //Precondition: Last/current row and collumn are not smaller/larger than the row and collumn size of the board. 
+    //Postcondition: Updates the GUI according after the users input
+    //@param: The GUI, the board row and collumn, the cell row and collumn
     public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
         //there is currently a few bugs
         //if you have a board selected you can click on another board and choose a different spot
         //if you end up in a draw case, you are stuck.
-        System.out.println(Arrays.deepToString(boardsWon));
 
-            if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere)
-                    && ((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0)
-                    && data[boardRow][boardCol].checkForWin() == 0)){
+            if((boardRow == lastRow && boardCol == lastCol) || pickAnywhere){
+                if(((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) && data[boardRow][boardCol].checkForWin() == 0)){
                     lastRow = cellRow;
                     lastCol = cellCol;
                     data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
@@ -28,21 +29,21 @@ public class Main {
                     frame.repaint();
                     gui.drawHighlight(g,lastCol,lastRow);
                     pickAnywhere = false;
-            }else if(boardsWon[boardRow][boardCol] != 0){
-                System.out.println("Selected");
+                }
+            }
+            else{
                 lastRow = cellRow;
                 lastCol = cellCol;
-                gui.drawHighlight(g,-1,-1);
                 frame.repaint();
+                gui.drawHighlight(g,-1,-1);
                 pickAnywhere = true;
-        }
-
-
+            }
     }
 
+    //Author: Noah, Harry
+    //Precondition: Overall board is less than 3 width and length
+    //Postcondition: Sets the 3x3 grid and GUI 
     public static void main(String[] args) {
-
-
 
         // Scanner scanner = new Scanner(System.in);
 
@@ -53,7 +54,7 @@ public class Main {
             }
         }
 
-        Random rand = new Random();
+        /*Random rand = new Random();
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 for (int x = 0; x < 3; x++) {
@@ -62,7 +63,7 @@ public class Main {
                     }
                 }
             }
-        }
+        }*/
 
 
         frame.setTitle("Ultimate Tic-Tac-Toe");
@@ -75,7 +76,11 @@ public class Main {
 
     }
     
-
+    //Author: Harry
+    //Precondition: Overall board is less than 3 width and length
+    //Postcondition: It will return 1, 0, or -1 depending on if the game is won/lost/neither. 
+    //@para: The board
+    //@return: It will return 1, 0, or -1 depending on if the game is won/lost/neither. 
     public static int checkBoard(Board[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].checkForWin() != 0 && board[i][0].checkForWin() == board[i][1].checkForWin()
