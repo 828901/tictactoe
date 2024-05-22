@@ -1,6 +1,13 @@
 import java.util.*;
 //https://en.wikipedia.org/wiki/Box-drawing_characters
+
+//Class Authors: Harry, Noah, Parker
+//Class Purpose: Runs the ultimate tic tac toe by printing the board and asking the user for input until a user wins. 
 public class SprintTwo {
+    
+    //Author: Noah, Harry, Parker
+    //Precondition: Overall board is less than 3 width and length
+    //Postcondition: The ultimate tic tac toe game is run
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -8,7 +15,7 @@ public class SprintTwo {
         Board[][] data = new Board[3][3];
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
-                data[r][c] = new Board();
+                data[r][c] = new Board(3, 3);
             }
         }
 
@@ -127,6 +134,11 @@ public class SprintTwo {
         }
     }
 
+    //Author: Parker
+    //Precondition: 2d array board should be less than 3 width and length.
+    //Postcondition: It will return 1, 0, or -1 depending on if the game is won/lost/neither. 
+    //@para: The board
+    //@return: It will return 1, 0, or -1 depending on if the game is won/lost/neither.
     public static int checkBoard(Board[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].checkForWin() != 0 && board[i][0].checkForWin() == board[i][1].checkForWin() && board[i][0].checkForWin() == board[i][2].checkForWin())
