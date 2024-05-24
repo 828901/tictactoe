@@ -21,14 +21,14 @@ public class Main {
             if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere) //check if in correct board or you can pick anywhere
                 && (data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) //check if cell is empty
                 && data[boardRow][boardCol].checkForWin() == 0) //check if board is not won
-              
+
             {
                 lastRow = cellRow;
                 lastCol = cellCol;
                 data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
                 currentPlayer *= -1;
                 frame.repaint();
-                if(data[lastRow][lastCol].checkForWin() != 0 || data[lastRow][lastCol].checkFull() == true){
+                if(data[lastRow][lastCol].checkForWin() != 0 || data[lastRow][lastCol].checkFull()){
                     gui.drawHighlight(g,-1,-1);
                     pickAnywhere = true;
                 }else{
