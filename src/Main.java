@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 import javax.swing.*;
 
 //Class Author: Noah, Harry
@@ -21,16 +22,22 @@ public class Main {
         //if you have a board selected you can click on another board and choose a different spot
         //if you end up in a draw case, you are stuck.
 
-            if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere)
+            if(((boardRow == lastRow && boardCol == lastCol)
                 && ((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0)
-                && data[boardRow][boardCol].checkForWin() == 0)){
+                && data[boardRow][boardCol].checkForWin() == 0)) || pickAnywhere ){
                     lastRow = cellRow;
                     lastCol = cellCol;
                     data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
                     currentPlayer *= -1;
                     frame.repaint();
-                    gui.drawHighlight(g,lastCol,lastRow);
-                    pickAnywhere = false;
+                    if(data[lastCol][lastRow].checkForWin() != 0){
+                        gui.drawHighlight(g,-1,-1);
+                        pickAnywhere = true;
+                    }else{
+                        gui.drawHighlight(g,lastCol,lastRow);
+                        pickAnywhere = false;
+                    }
+
 
             }else if(boardsWon[boardRow][boardCol] != 0){
                 lastRow = cellRow;
