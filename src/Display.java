@@ -1,3 +1,6 @@
+//Author: Noah
+//Precondition: board length and width <3
+//Postcondition: na
 public class Display {
     static void render(Board data){
         int[][] board = data.getBoard();
