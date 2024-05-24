@@ -1,3 +1,5 @@
+//Author: Noah
+//Class Purpose: Generate and display the grid of the board
 public class DisplayGrid {
 
     public static char getSymbol(int number){
@@ -9,7 +11,11 @@ public class DisplayGrid {
 
         return ' ';
     }
-
+    
+    //Author: Noah
+    //Precondition: board length and width !> 3
+    //Postcondition: generates and displays the grid of the board 
+    //@param: The board 
     static void render(Board[][] data){
         System.out.println("┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓");
         for(int r = 0; r < 3; r++) {
