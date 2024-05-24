@@ -15,7 +15,7 @@ public class SprintTwo {
         Board[][] data = new Board[3][3];
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
-                data[r][c] = new Board(3, 3);
+                data[r][c] = new Board();
             }
         }
 

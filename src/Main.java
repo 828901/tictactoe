@@ -2,26 +2,28 @@ import java.awt.*;
 import javax.swing.*;
 
 //Class Author: Noah, Harry
-//Class Purpose: Runs the ultimate tic tac toe board game, updates the GUI according to user input, and returns a value after checking the board for a winner. 
+//Class Purpose: Runs the ultimate tic-tac-toe board game, updates the GUI according to user input, and returns a value after checking the board for a winner.
 public class Main {
     static JFrame frame = new JFrame();
     static Board[][] data = new Board[3][3];
     static int currentPlayer = 1;// 1 for X, -1 for O
     static boolean pickAnywhere = true;
     static int lastRow, lastCol;
-    static GraphicalUserInterface gui = new GraphicalUserInterface(data);
+    static int[][] boardsWon = new int[3][3];
+    static GraphicalUserInterface gui = new GraphicalUserInterface(data, boardsWon);
 
     //Author: Noah 
-    //Precondition: Last/current row and collumn are not smaller/larger than the row and collumn size of the board. 
-    //Postcondition: Updates the GUI according after the users input
-    //@param: The GUI, the board row and collumn, the cell row and collumn
+    //Precondition: Last/current row and column are not smaller/larger than the row and column size of the board.
+    //Postcondition: Updates the GUI according to the users input
+    //@param: The GUI, the board row and column, the cell row and column
     public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
         //there is currently a few bugs
         //if you have a board selected you can click on another board and choose a different spot
         //if you end up in a draw case, you are stuck.
 
-            if((boardRow == lastRow && boardCol == lastCol) || pickAnywhere){
-                if(((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) && data[boardRow][boardCol].checkForWin() == 0)){
+            if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere)
+                && ((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0)
+                && data[boardRow][boardCol].checkForWin() == 0)){
                     lastRow = cellRow;
                     lastCol = cellCol;
                     data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
@@ -29,9 +31,8 @@ public class Main {
                     frame.repaint();
                     gui.drawHighlight(g,lastCol,lastRow);
                     pickAnywhere = false;
-                }
-            }
-            else{
+
+            }else if(boardsWon[boardRow][boardCol] != 0){
                 lastRow = cellRow;
                 lastCol = cellCol;
                 frame.repaint();
