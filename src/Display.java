@@ -1,6 +1,5 @@
 //Author: Noah
-//Precondition: board length and width <3
-//Postcondition: na
+//Class Purpose: Display the moves of the players as they choose empty squares to play their shape
 public class Display {
     static void render(Board data){
         int[][] board = data.getBoard();
