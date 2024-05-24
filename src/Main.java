@@ -18,25 +18,23 @@ public class Main {
     //Postcondition: Updates the GUI according to the users input
     //@param: The GUI, the board row and column, the cell row and column
     public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
-        //there is currently a few bugs
-        //if you have a board selected you can click on another board and choose a different spot
-        //if you end up in a draw case, you are stuck.
-
-            if(((boardRow == lastRow && boardCol == lastCol)
-                && ((data[boardRow][boardCol].getValue(cellRow,cellCol) == 0)
-                && data[boardRow][boardCol].checkForWin() == 0)) || pickAnywhere ){
-                    lastRow = cellRow;
-                    lastCol = cellCol;
-                    data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
-                    currentPlayer *= -1;
-                    frame.repaint();
-                    if(data[lastCol][lastRow].checkForWin() != 0){
-                        gui.drawHighlight(g,-1,-1);
-                        pickAnywhere = true;
-                    }else{
-                        gui.drawHighlight(g,lastCol,lastRow);
-                        pickAnywhere = false;
-                    }
+            if(((boardRow == lastRow && boardCol == lastCol) || pickAnywhere) //check if in correct board or you can pick anywhere
+                && (data[boardRow][boardCol].getValue(cellRow,cellCol) == 0) //check if cell is empty
+                && data[boardRow][boardCol].checkForWin() == 0) //check if board is not won
+              
+            {
+                lastRow = cellRow;
+                lastCol = cellCol;
+                data[boardRow][boardCol].modifyBoard(cellRow,cellCol,currentPlayer);
+                currentPlayer *= -1;
+                frame.repaint();
+                if(data[lastRow][lastCol].checkForWin() != 0 || data[lastRow][lastCol].checkFull() == true){
+                    gui.drawHighlight(g,-1,-1);
+                    pickAnywhere = true;
+                }else{
+                    gui.drawHighlight(g,lastCol,lastRow);
+                    pickAnywhere = false;
+                }
 
 
             }else if(boardsWon[boardRow][boardCol] != 0){
