@@ -23,7 +23,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry, Noah
     //Precondition: X and Y exist when mouse
     //Postcondition: Creates a new GUI as well as detector for when the mouse is clicked. 
-    //@para: The board, 2d integer of the win status of each board
+    //@param: The board, 2d integer of the win status of each board
     public GraphicalUserInterface(Board[][] boards, int[][] boardsWonIn) { 
         boardsWon = boardsWonIn;
         this.boards = boards;
@@ -34,7 +34,7 @@ public class GraphicalUserInterface extends JPanel {
             //Author: Harry, Noah
             //Precondition: X and Y exist where mouse is clicked. 
             //Postcondition: The GUI is updated with the users input at the location of the mouse clicked. 
-            //@para: Mouse clicked
+            //@param: Mouse click
             @Override
           public void mouseClicked(MouseEvent e) {
             int x = e.getX();
@@ -50,7 +50,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: X and Y are not beyond the borders of the board. 
     //Postcondition: the board/cell row and column are updated to the users location.
-    //@para: The locations of x and y where the mouse is clicked. 
+    //@param: The locations of x and y where the mouse is clicked. 
     private void registerUserInput(int x, int y) {
         // Determine the larger board
         boardRow = y / (BOARD_SIZE * CELL_SIZE);
@@ -64,7 +64,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: GUI exists.  
     //Postcondition: The GUI's visual aspect is created. If a user has won a board, a large symbol (X/O) is drawn in accordance to the user that won. 
-    //@para: The GUI 
+    //@param: The GUI 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -134,7 +134,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: The board/cell row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "X" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board/cell row and column.  
+    //@param: The GUI of the board, the board/cell row and column.  
     private void drawX(Graphics2D g2d, int boardRow, int boardCol, int cellRow, int cellCol) {
         g2d.setStroke(new BasicStroke(4f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE + cellCol * CELL_SIZE;
@@ -146,7 +146,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: The board/cell row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "O" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board/cell row and column.  
+    //@param: The GUI of the board, the board/cell row and column.  
     private void drawO(Graphics2D g2d, int boardRow, int boardCol, int cellRow, int cellCol) {
         g2d.setStroke(new BasicStroke(4f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE + cellCol * CELL_SIZE;
@@ -157,7 +157,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "X" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board row and column.  
+    //@param: The GUI of the board, the board row and column.  
     private void drawBigRedX(Graphics2D g2d, int boardRow, int boardCol) {
         boardsWon[boardRow][boardCol] = 1;
         g2d.setColor(Color.RED);
@@ -172,7 +172,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Harry
     //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "O" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board row and column. 
+    //@param: The GUI of the board, the board row and column. 
     private void drawBigRedO(Graphics2D g2d, int boardRow, int boardCol) {
         boardsWon[boardRow][boardCol] = -1;
         g2d.setColor(Color.RED);
@@ -186,7 +186,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Noah
     //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: The cell for which the user needs to make the next move on the board is highlighted. 
-    //@para: The GUI of the board, the board row and column. 
+    //@param: The GUI of the board, the board row and column. 
     public void drawHighlight(Graphics g, int row, int col){
         hightlightRow = row;
         hightlightCol = col;
@@ -195,7 +195,7 @@ public class GraphicalUserInterface extends JPanel {
     //Author: Noah
     //Precondition: The board row and  exist and are not larger or smaller than the board size. 
     //Postcondition: The board is updated with the inputed board. 
-    //@para: The board. 
+    //@param: The board. 
     private void updateBoard(Board[][] boards) {this.boards = boards;}
     
 }
