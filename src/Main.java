@@ -13,9 +13,9 @@ public class Main {
     static GraphicalUserInterface gui = new GraphicalUserInterface(data, boardsWon);
 
     //Author: Noah 
-    //Precondition: Last/current row and collumn are not smaller/larger than the row and collumn size of the board.
+    //Precondition: Last/current row and column are not smaller/larger than the row and column size of the board.
     //Postcondition: Updates the GUI according to the users input
-    //@param: The GUI, the board row and collumn, the cell row and collumn
+    //@param: The GUI, the board row and column, the cell row and column
     public static void update(Graphics g, int boardRow, int boardCol, int cellRow, int cellCol){
         //there is currently a few bugs
         //if you have a board selected you can click on another board and choose a different spot
