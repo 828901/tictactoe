@@ -49,7 +49,7 @@ public class GraphicalUserInterface extends JPanel {
 
     //Author: Harry
     //Precondition: X and Y are not beyond the borders of the board. 
-    //Postcondition: the board/cell row and collumn are updated to the users location.
+    //Postcondition: the board/cell row and column are updated to the users location.
     //@para: The locations of x and y where the mouse is clicked. 
     private void registerUserInput(int x, int y) {
         // Determine the larger board
@@ -132,9 +132,9 @@ public class GraphicalUserInterface extends JPanel {
 
     // Method to draw X or O in a cell
     //Author: Harry
-    //Precondition: The board/cell row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board/cell row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "X" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board/cell row and collumn.  
+    //@para: The GUI of the board, the board/cell row and column.  
     private void drawX(Graphics2D g2d, int boardRow, int boardCol, int cellRow, int cellCol) {
         g2d.setStroke(new BasicStroke(4f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE + cellCol * CELL_SIZE;
@@ -144,9 +144,9 @@ public class GraphicalUserInterface extends JPanel {
     }
     
     //Author: Harry
-    //Precondition: The board/cell row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board/cell row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "O" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board/cell row and collumn.  
+    //@para: The GUI of the board, the board/cell row and column.  
     private void drawO(Graphics2D g2d, int boardRow, int boardCol, int cellRow, int cellCol) {
         g2d.setStroke(new BasicStroke(4f));
         int x = boardCol * BOARD_SIZE * CELL_SIZE + cellCol * CELL_SIZE;
@@ -155,9 +155,9 @@ public class GraphicalUserInterface extends JPanel {
     }
     
     //Author: Harry
-    //Precondition: The board row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "X" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board row and collumn.  
+    //@para: The GUI of the board, the board row and column.  
     private void drawBigRedX(Graphics2D g2d, int boardRow, int boardCol) {
         boardsWon[boardRow][boardCol] = 1;
         g2d.setColor(Color.RED);
@@ -170,9 +170,9 @@ public class GraphicalUserInterface extends JPanel {
       }
     
     //Author: Harry
-    //Precondition: The board row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: An "O" is drawn in the specific cell. 
-    //@para: The GUI of the board, the board row and collumn. 
+    //@para: The GUI of the board, the board row and column. 
     private void drawBigRedO(Graphics2D g2d, int boardRow, int boardCol) {
         boardsWon[boardRow][boardCol] = -1;
         g2d.setColor(Color.RED);
@@ -184,16 +184,16 @@ public class GraphicalUserInterface extends JPanel {
     }
 
     //Author: Noah
-    //Precondition: The board row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board row and column exist and are not larger or smaller than the board size. 
     //Postcondition: The cell for which the user needs to make the next move on the board is highlighted. 
-    //@para: The GUI of the board, the board row and collumn. 
+    //@para: The GUI of the board, the board row and column. 
     public void drawHighlight(Graphics g, int row, int col){
         hightlightRow = row;
         hightlightCol = col;
     }
     
     //Author: Noah
-    //Precondition: The board row and collumn exist and are not larger or smaller than the board size. 
+    //Precondition: The board row and  exist and are not larger or smaller than the board size. 
     //Postcondition: The board is updated with the inputed board. 
     //@para: The board. 
     private void updateBoard(Board[][] boards) {this.boards = boards;}
