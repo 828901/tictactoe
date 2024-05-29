@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Random;
 import javax.swing.*;
 
-//Class Author: Noah, Harry
+//Class Author: Noah, Harry, Alex, Parker
 //Class Purpose: Runs the ultimate tic-tac-toe board game, updates the GUI according to user input, and returns a value after checking the board for a winner.
 public class Main {
     static JFrame frame = new JFrame();
@@ -13,7 +13,7 @@ public class Main {
     static int[][] boardsWon = new int[3][3];
     static GraphicalUserInterface gui = new GraphicalUserInterface(data, boardsWon);
 
-    //Author: Noah 
+    //Author: Noah, Alex 
     //Precondition: Last/current row and column are not smaller/larger than the row and column size of the board.
     //Postcondition: Updates the GUI according to the users input
     //@param: The GUI, the board row and column, the cell row and column
@@ -46,7 +46,7 @@ public class Main {
             }
     }
 
-    //Author: Noah, Harry
+    //Author: Noah, Harry, Parker
     //Precondition: Overall board is less than 3 width and length
     //Postcondition: Sets the 3x3 grid and GUI 
     public static void main(String[] args) {
@@ -82,7 +82,7 @@ public class Main {
 
     }
     
-    //Author: Harry
+    //Author: Harry, Alex, Parker
     //Precondition: Overall board is less than 3 width and length
     //Postcondition: It will return 1, 0, or -1 depending on if the game is won/lost/neither. 
     //@para: The board
