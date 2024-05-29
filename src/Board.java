@@ -44,7 +44,7 @@ public class Board {
         board[x][y] = value;
     }
 
-    // Author: Noah
+    // Author: Parker, Alex
     // Precondition: board exists.
     // Postcondition: A String representing the game state of a board is returned.
     // @return a String representing the game state of a board is returned.
@@ -105,7 +105,7 @@ public class Board {
         return 0;
     }
 
-    // Author Harry
+    // Author Alex, Parker
     // Precondition: board exists
     // Postcondition: Return true if the board is full, false otherwise.
     // @return true if the board is full, false otherwise.
